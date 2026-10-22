@@ -1,0 +1,135 @@
+/*
+ * ============================================================================
+ * Component   : com_joaktree_chart
+ * Bestand     : jtchart_personcard.css
+ * Aangemaakt  : 13-10-2026
+ * Gewijzigd   : 19-10-2026
+ *
+ * Doel        : Indeling van de grafische naamkaarten.
+ *
+ * Dit component verzorgt de grafische visualisatie van
+ * genealogische gegevens uit com_joaktree.
+ *
+ * Auteur       : Frits van Leeuwen
+ * Bedrijf      : Van Leeuwen Webdesign
+ * Website      : https://vanleeuwenwebdesign.nl
+ * Licentie     : GNU General Public License v2 of later
+ * ============================================================================
+ */
+
+/* ============================================================================
+ * 1. Basisstijlen voor alle persoonskaarten
+ * ============================================================================ */
+.person-card {
+    position: absolute !important;
+    margin: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    display: inline-block;
+    box-sizing: border-box !important;
+    border-radius: 8px !important;
+    padding: 15px !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+    text-align: center !important;
+    white-space: nowrap !important;
+    /* Houdt datum + locatie netjes op één regel */
+}
+
+/* Zorg dat de tekstregels gecentreerd blijven en namen niet ongewenst afbreken */
+.person-card [class*="person-"],
+#main-person-card [class*="person-"],
+#partner-person-card [class*="person-"] {
+    text-align: center !important;
+    width: 100%;
+}
+
+.person-card .person-dates {
+    white-space: nowrap !important;
+}
+
+/* ============================================================================
+ * 2. Specifieke stijlen: Hoofdpersoon (dubbel kader)
+ * ============================================================================ */
+.person-card.person-card-main {
+    background: #ffffff;
+    border: 3px double #2c3e50 !important;
+}
+
+/* ============================================================================
+ * 3. Specifieke stijlen: Partner / Placeholder (enkel kader)
+ * ============================================================================ */
+.person-card.person-card-partner,
+#partner-person-card {
+    background: #f4f6f7 !important;
+    border: 1px solid #2c3e50 !important;
+}
+
+/* Container voor alle partnerkaarten (actief en gestapeld) */
+#partner-container {
+    position: absolute !important;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+}
+
+/* ============================================================================
+ * 4. Gestapelde partnerkaarten (Eerdere & Latere partners)
+ * ============================================================================ */
+.person-card.person-card-partner-stack {
+    background: #eaeded !important;
+    border: 1px solid #7f8c8d !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+    z-index: 2 !important;
+    /* Lager dan de verbindingslijn (z-index: 10) */
+}
+
+/* Eerdere partners: naam bovenin */
+.person-card-partner-stack .stack-name-top {
+    text-align: center !important;
+    width: 100%;
+    white-space: nowrap !important;
+    font-size: 0.9em;
+}
+
+/* Latere partners: kaart als relative container voor naam onderin */
+.person-card.person-card-partner-stack.partner-stack-later {
+    padding: 0 !important;
+    /* Padding opheffen zodat de naam strak tegen de onderkant kan */
+}
+
+/* Naam strak aan de onderkant van de latere partnerkaart */
+.person-card-partner-stack .stack-name-bottom {
+    position: absolute !important;
+    bottom: 12px !important;
+    left: 0;
+    right: 0;
+    text-align: center !important;
+    width: 100%;
+    white-space: nowrap !important;
+    font-size: 0.9em;
+}
+
+/* ============================================================================
+ * 5. Klikbaarheid en interactie
+ * ============================================================================ */
+.jt-person-link,
+.jt-inactive-partner-link,
+.jt-inactive-partner {
+    cursor: pointer !important;
+}
+
+/* Zorg dat de gestapelde kaart ook visueel reageert op de muis */
+.jt-inactive-partner:hover {
+    opacity: 0.9;
+}
+
+.person-card-clickable {
+    cursor: pointer !important;
+}
+
+.person-card-clickable:hover {
+    opacity: 0.95;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15) !important;
+}

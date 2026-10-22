@@ -1,0 +1,56 @@
+/*
+ * ============================================================================
+ * Component   : com_joaktree_chart
+ * Bestand     : jtchart_lines.css
+ * Aangemaakt  : 16-10-2026
+ * Gewijzigd   : 20-10-2026
+ *
+ * Doel        : configuratie van de lijnen
+ *
+ * Dit component verzorgt de grafische visualisatie van
+ * genealogische gegevens uit com_joaktree.
+ *
+ * Auteur       : Frits van Leeuwen
+ * Bedrijf      : Van Leeuwen Webdesign
+ * Website      : https://vanleeuwenwebdesign.nl
+ * Licentie     : GNU General Public License v2 of later
+ * ============================================================================
+ */
+
+/* Partnerlijn en Ouderlijn algemene stijlen */
+.jt-line-partner,
+.jt-line-parents,
+#jt-partner-connection-line,
+#jt-main-parents-line,
+#jt-partner-parents-line {
+    position: absolute !important;
+    height: 2px;
+    background-color: #2c3e50;
+    z-index: 10 !important;
+    pointer-events: none;
+    display: none;
+}
+
+/* Horizontale verzamellijn voor de kinderstruktur */
+.jt-line-horizontal-children {
+    position: absolute !important;
+    height: 2px;
+    background-color: #2c3e50;
+    z-index: 10 !important;
+    pointer-events: none;
+    display: none;
+}
+
+/* Verticale verbindingslijnen */
+.jt-line-vertical,
+#jt-main-parents-vertical-line,
+#jt-partner-parents-vertical-line,
+#jt-children-vertical-main,
+.child-vertical-line {
+    position: absolute !important;
+    width: 2px;
+    background-color: #2c3e50;
+    z-index: 10 !important;
+    pointer-events: none;
+    display: none;
+}

@@ -1,0 +1,39 @@
+/*
+ * ============================================================================
+ * Component   : com_joaktree_chart
+ * Bestand     : jtchart_layers.css
+ * Aangemaakt  : 13-10-2026
+ * Gewijzigd   :
+ *
+ * Doel        : configuratie van de vaste lagen.
+ *
+ * Dit component verzorgt de grafische visualisatie van
+ * genealogische gegevens uit com_joaktree.
+ *
+ * Auteur       : Frits van Leeuwen
+ * Bedrijf      : Van Leeuwen Webdesign
+ * Website      : https://vanleeuwenwebdesign.nl
+ * Licentie     : GNU General Public License v2 of later
+ * ============================================================================
+ */
+
+#parents-layer {
+    position: relative;
+    height: 300px;
+    background: #d8eaff;
+    border: 1px solid #90b7dd;
+}
+
+#main-layer {
+    position: relative;
+    height: 300px;
+    background: #d8ffd8;
+    border: 1px solid #90cc90;
+}
+
+#children-layer {
+    position: relative;
+    height: 300px;
+    background: #ffe8d8;
+    border: 1px solid #ddb090;
+}

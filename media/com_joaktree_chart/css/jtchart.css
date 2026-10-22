@@ -1,0 +1,41 @@
+/**
+ * ============================================================================
+ * Component    : com_joaktree_chart
+ * Bestand      : jtchart.css
+ * Locatie      : media/com_joaktree_chart/css/
+ * Aangemaakt   : 13-10-2026
+ * Gewijzigd    :
+ *
+ * Doel:
+ * Stijlen voor de grafische visualisatie (chart) binnen com_joaktree_chart.
+ *
+ * Dit component verzorgt de grafische visualisatie van
+ * genealogische gegevens uit com_joaktree.
+ *
+ * Auteur       : Frits van Leeuwen
+ * Bedrijf      : Van Leeuwen Webdesign
+ * Website      : https://vanleeuwenwebdesign.nl
+ * Licentie     : GNU General Public License v2 of later
+ * ============================================================================
+ */
+
+#jtchart-container {
+    position: relative;
+    width: 100%;
+    min-height: 900px;
+    background-color: #f9f9f9;
+    border: 1px dashed #ccc;
+    padding: 20px;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+#jtchart-container h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+#jtchart-container p {
+    margin-bottom: 10px;
+    color: #555;
+}
