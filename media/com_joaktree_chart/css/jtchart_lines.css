@@ -1,23 +1,23 @@
 /*
  * ============================================================================
  * Component   : com_joaktree_chart
- * Bestand     : jtchart_lines.css
- * Aangemaakt  : 16-10-2026
- * Gewijzigd   : 20-10-2026
+ * File        : jtchart_lines.css
+ * Created     : 16-10-2026
+ * Modified    : 20-10-2026
  *
- * Doel        : configuratie van de lijnen
+ * Purpose     : Configuration of the lines
  *
- * Dit component verzorgt de grafische visualisatie van
- * genealogische gegevens uit com_joaktree.
+ * This component provides the graphical visualisation of
+ * genealogical data from com_joaktree.
  *
- * Auteur       : Frits van Leeuwen
- * Bedrijf      : Van Leeuwen Webdesign
+ * Author       : Frits van Leeuwen
+ * Company      : Van Leeuwen Webdesign
  * Website      : https://vanleeuwenwebdesign.nl
- * Licentie     : GNU General Public License v2 of later
+ * License      : GNU General Public License v2 or later
  * ============================================================================
  */
 
-/* Partnerlijn en Ouderlijn algemene stijlen */
+/* Partner line and Parent line general styles */
 .jt-line-partner,
 .jt-line-parents,
 #jt-partner-connection-line,
@@ -31,7 +31,7 @@
     display: none;
 }
 
-/* Horizontale verzamellijn voor de kinderstruktur */
+/* Horizontal collection line for the children structure */
 .jt-line-horizontal-children {
     position: absolute !important;
     height: 2px;
@@ -41,7 +41,7 @@
     display: none;
 }
 
-/* Verticale verbindingslijnen */
+/* Vertical connection lines */
 .jt-line-vertical,
 #jt-main-parents-vertical-line,
 #jt-partner-parents-vertical-line,

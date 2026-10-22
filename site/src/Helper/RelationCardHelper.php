@@ -2,19 +2,19 @@
 /**
  * =============================================================================
  * Component    : com_joaktree_chart
- * Bestand      : RelationCardHelper.php
- * Aangemaakt   : 13-10-2026
- * Gewijzigd    :
+ * File         : RelationCardHelper.php
+ * Created      : 13-10-2026
+ * Modified     :
  *
- * Doel         : Centrale helper voor het renderen van relatiekaarten.
+ * Purpose      : Central helper for rendering relation cards.
  *
- * Dit component verzorgt de grafische visualisatie van
- * genealogische gegevens uit com_joaktree.
+ * This component provides the graphical visualisation of
+ * genealogical data from com_joaktree.
  *
- * Auteur       : Frits van Leeuwen
- * Bedrijf      : Van Leeuwen Webdesign
+ * Author       : Frits van Leeuwen
+ * Company      : Van Leeuwen Webdesign
  * Website      : https://vanleeuwenwebdesign.nl
- * Licentie     : GNU General Public License v2 of later
+ * License      : GNU General Public License v2 or later
  * =============================================================================
  */
 

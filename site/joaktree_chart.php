@@ -2,21 +2,21 @@
 /**
  * ============================================================================
  * Component    : com_joaktree_chart
- * Bestand      : joaktree_chart.php
- * Locatie      : site
- * Aangemaakt   : 12-10-2026
- * Gewijzigd    :
+ * File         : joaktree_chart.php
+ * Location     : site
+ * Created      : 12-10-2026
+ * Modified     :
  *
- * Doel:
- * Eerste testpagina van Joaktree Chart.
+ * Purpose:
+ * First test page of Joaktree Chart.
  *
- * Dit component verzorgt de grafische visualisatie van
- * genealogische gegevens uit com_joaktree.
+ * This component provides the graphical visualisation of
+ * genealogical data from com_joaktree.
  *
- * Auteur       : Frits van Leeuwen
- * Bedrijf      : Van Leeuwen Webdesign
+ * Author       : Frits van Leeuwen
+ * Company      : Van Leeuwen Webdesign
  * Website      : https://vanleeuwenwebdesign.nl
- * Licentie     : GNU General Public License v2 of later
+ * License      : GNU General Public License v2 or later
  * ============================================================================
  */
 
@@ -25,22 +25,22 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Controller\BaseController;
 
-// Laat Joomla de applicatie en de MVC factory aanspreken voor dit component
+// Let Joomla access the application and the MVC factory for this component
 $app = Factory::getApplication();
 $input = $app->input;
 
-// Bepaal de controller naam (standaard 'display' of wat uit de input komt)
+// Determine the controller name (default: 'display' or whatever comes from the input)
 $controllerName = $input->get('controller', 'Display');
 
-// Pad naar de controller binnen jouw namespace-structuur
+// Path to the controller within the namespace structure
 $classname = '\\VanLeeuwenWebdesign\\Component\\JoaktreeChart\\Site\\Controller\\' . ucfirst($controllerName) . 'Controller';
 
 if (!class_exists($classname)) {
-    // Fallback naar de standaard BaseController als de specifieke controller niet bestaat
+    // Fallback to the standard BaseController if the specific controller does not exist
     $classname = BaseController::class;
 }
 
-// Instantieer en voer de controller uit
+// Instantiate and execute the controller
 /** @var BaseController $controller */
 $controller = new $classname();
 $controller->execute($input->get('task', 'display'));

@@ -2,20 +2,20 @@
 /**
  * ============================================================================
  * Component    : com_joaktree_chart
- * Bestand      : DisplayController.php
- * Locatie      : site/src/Controller
- * Aangemaakt   : 12-10-2026
+ * File         : DisplayController.php
+ * Location     : site/src/Controller
+ * Created      : 12-10-2026
  *
- * Doel:
- * Standaard controller voor com_joaktree_chart.
+ * Purpose:
+ * Default controller for com_joaktree_chart.
  *
- * Dit component verzorgt de grafische visualisatie van
- * genealogische gegevens uit com_joaktree.
+ * This component provides the graphical visualisation of
+ * genealogical data from com_joaktree.
  *
- * Auteur       : Frits van Leeuwen
- * Bedrijf      : Van Leeuwen Webdesign
+ * Author       : Frits van Leeuwen
+ * Company      : Van Leeuwen Webdesign
  * Website      : https://vanleeuwenwebdesign.nl
- * Licentie     : GNU General Public License v2 of later
+ * License      : GNU General Public License v2 or later
  * ============================================================================
  */
 
@@ -31,23 +31,23 @@ class DisplayController extends BaseController
 
     public function display($cachable = false, $urlparams = false)
     {
-        // Haal de view op die in de URL staat (standaard 'person')
+        // Get the view name from the URL (default: 'person')
         $viewName = $this->input->get('view', 'person');
         $viewType = $this->app->getDocument()->getType();
         $viewLayout = $this->input->get('layout', 'default');
 
-        // Bepaal de volledige class van de View binnen jouw namespace
+        // Determine the full class name of the View within the namespace
         $viewClass = '\\VanLeeuwenWebdesign\\Component\\JoaktreeChart\\Site\\View\\' . ucfirst($viewName) . '\\HtmlView';
         $modelClass = '\\VanLeeuwenWebdesign\\Component\\JoaktreeChart\\Site\\Model\\' . ucfirst($viewName) . 'Model';
 
-        // Als de HTML view klasse bestaat, roepen we hem direct handmatig en feilloos aan
+        // If the HTML view class exists, instantiate it directly
         if (class_exists($viewClass)) {
             $view = new $viewClass([
                 'base_path' => $this->basePath,
                 'layout'    => $viewLayout
             ]);
 
-            // Koppel eventueel een model als het bestaat
+            // Attach a model if one exists
             if (class_exists($modelClass)) {
                 $model = new $modelClass();
                 $view->setModel($model, true);
@@ -55,12 +55,12 @@ class DisplayController extends BaseController
 
             $view->document = $this->app->getDocument();
 
-            // Voer de display uit van de view
+            // Execute the display method of the view
             $view->display(null);
             return $this;
         }
 
-        // Fallback naar oudergedrag als er iets afwijkt
+        // Fallback to parent behaviour if something differs
         return parent::display($cachable, $urlparams);
     }
 }

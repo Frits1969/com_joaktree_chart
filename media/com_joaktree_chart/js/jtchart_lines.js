@@ -1,15 +1,15 @@
 /**
  * ============================================================================
  * Component    : com_joaktree_chart
- * Bestand      : jtchart_lines.js
- * Locatie      : media/com_joaktree_chart/js/
- * Aangemaakt   : 16-10-2026
- * Gewijzigd    : 21-10-2026
+ * File         : jtchart_lines.js
+ * Location     : media/com_joaktree_chart/js/
+ * Created      : 16-10-2026
+ * Modified     : 21-10-2026
  *
- * Doel:
- * Beheert het tekenen van alle lijnen tussen personen nadat de kaarten
- * gepositioneerd zijn. Horizontale en verticale ouderlijnen zijn samengevoegd
- * om dubbeling en uitlijningsfouten te voorkomen.
+ * Purpose:
+ * Manages drawing of all lines between persons after the cards have been
+ * positioned. Horizontal and vertical parent lines have been merged
+ * to avoid duplication and alignment errors.
  * ============================================================================
  */
 
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('resize', drawAllLines);
 });
 
-// Kleine pauze zodat de calculator eerst de kaarten kan neerzetten
+// Brief pause to allow the calculator to position the cards first
 function drawAllLines() {
     setTimeout(() => {
         drawPartnerLine();
@@ -80,8 +80,8 @@ function drawPartnerLine() {
 }
 
 /**
- * Gecombineerde functie voor zowel de horizontale ouderlijnen als de verticale lijnen
- * van ouders naar kinderen (Laag 1 -> Laag 2). Ze delen exact dezelfde coördinatenberekening.
+ * Combined function for both the horizontal parent lines and the vertical lines
+ * from parents to children (Layer 1 -> Layer 2). They share the exact same coordinate calculation.
  */
 function drawParentLinesAndVerticalLines() {
     const parentsLayer = document.getElementById('parents-layer');
@@ -92,7 +92,7 @@ function drawParentLinesAndVerticalLines() {
     const mainLayer = document.getElementById('main-layer');
 
     // ==========================================
-    // 1. OUDERS HOOFDPERSOON
+    // 1. PARENTS OF MAIN PERSON
     // ==========================================
     const fatherMain = document.getElementById('mainParents-father-card');
     const motherMain = document.getElementById('mainParents-mother-card');
@@ -109,7 +109,7 @@ function drawParentLinesAndVerticalLines() {
         if (width > 0) {
             const centerY = fatherMain.offsetTop + (fatherMain.offsetHeight / 2);
 
-            // Horizontale lijn tekenen
+            // Draw horizontal line
             lineMain.style.display = 'block';
             lineMain.style.left = startX + 'px';
             lineMain.style.top = centerY + 'px';
@@ -119,7 +119,7 @@ function drawParentLinesAndVerticalLines() {
                 relationWrapperMain.style.display = 'block';
             }
 
-            // Verticale lijn exact afleiden uit dezelfde breedte en startX
+            // Derive the vertical line from the exact same width and startX
             if (verticalLineMain && mainCard) {
                 const centerX = parentsLayerLeft + startX + (width / 2);
                 const startY = parentsLayerTop + centerY;
@@ -148,7 +148,7 @@ function drawParentLinesAndVerticalLines() {
     }
 
     // ==========================================
-    // 2. OUDERS PARTNER
+    // 2. PARENTS OF PARTNER
     // ==========================================
     const fatherPartner = document.getElementById('partnerParents-father-card');
     const motherPartner = document.getElementById('partnerParents-mother-card');
@@ -165,7 +165,7 @@ function drawParentLinesAndVerticalLines() {
         if (width > 0) {
             const centerY = fatherPartner.offsetTop + (fatherPartner.offsetHeight / 2);
 
-            // Horizontale lijn tekenen
+            // Draw horizontal line
             linePartner.style.display = 'block';
             linePartner.style.left = startX + 'px';
             linePartner.style.top = centerY + 'px';
@@ -175,7 +175,7 @@ function drawParentLinesAndVerticalLines() {
                 relationWrapperPartner.style.display = 'block';
             }
 
-            // Verticale lijn exact afleiden uit dezelfde breedte en startX
+            // Derive the vertical line from the exact same width and startX
             if (verticalLinePartner && partnerCard) {
                 const centerX = parentsLayerLeft + startX + (width / 2);
                 const startY = parentsLayerTop + centerY;
@@ -205,7 +205,7 @@ function drawParentLinesAndVerticalLines() {
 }
 
 /**
- * Tekent de verbindingslijnen van Laag 2 (partner-relatielijn) naar Laag 3 (kinderen)
+ * Draws the connection lines from Layer 2 (partner relation line) to Layer 3 (children)
  */
 function drawChildrenLines() {
     const badgeInner = document.getElementById('badge-inner');
@@ -231,19 +231,19 @@ function drawChildrenLines() {
         return;
     }
 
-    // 1. Bereken het X-midden van de partnerrelatielijn precies tussen hoofdpersoon en partner
+    // 1. Calculate the X-centre of the partner relation line exactly between main person and partner
     const mainRight = mainCard.offsetLeft + mainCard.offsetWidth;
     const partnerLeft = partnerCard.offsetLeft;
     const relationCenterX = mainRight + ((partnerLeft - mainRight) / 2);
     const startX = mainLayer.offsetLeft + relationCenterX;
 
-    // 2. Start Y is de Y-positie van de partnerrelatielijn
+    // 2. Start Y is the Y-position of the partner relation line
     const startY = mainLayer.offsetTop + partnerLine.offsetTop;
 
-    // 3. Eind Y (waar de horizontale lijn op de top van Laag 3 ligt)
+    // 3. End Y (where the horizontal line sits at the top of Layer 3)
     const endY = childrenLayer.offsetTop;
 
-    // Haal het hart (midden) op van het eerste en laatste kind ten opzichte van #badge-inner
+    // Get the centre of the first and last child relative to #badge-inner
     const firstChild = childCards[0];
     const lastChild = childCards[childCards.length - 1];
 
@@ -251,7 +251,7 @@ function drawChildrenLines() {
     const lastChildCenterX = childrenLayer.offsetLeft + lastChild.offsetLeft + (lastChild.offsetWidth / 2);
 
     if (childCards.length === 1) {
-        // Bij 1 kind: rechte verticale lijn van relatielijn direct naar de bovenkant van het kind
+        // With 1 child: straight vertical line from relation line directly to the top of the child card
         const childTop = childrenLayer.offsetTop + firstChild.offsetTop;
         const totalHeight = childTop - startY;
 
@@ -269,16 +269,16 @@ function drawChildrenLines() {
         });
 
     } else {
-        // Bij meerdere kinderen: Kam-structuur met horizontale bar op de top van Laag 3 (endY)
+        // With multiple children: comb structure with horizontal bar at the top of Layer 3 (endY)
 
-        // 1. Hoofd verticale lijn vanaf relatielijn tot aan de top van Laag 3 (endY)
+        // 1. Main vertical line from relation line to the top of Layer 3 (endY)
         verticalMain.style.display = 'block';
         verticalMain.style.setProperty('position', 'absolute', 'important');
         verticalMain.style.setProperty('left', startX + 'px', 'important');
         verticalMain.style.setProperty('top', startY + 'px', 'important');
         verticalMain.style.setProperty('height', (endY - startY) + 'px', 'important');
 
-        // 2. Horizontale bar precies op de top van Laag 3 (endY), lopend van hart 1e kind tot hart laatste kind
+        // 2. Horizontal bar precisely at the top of Layer 3 (endY), running from centre of 1st child to centre of last child
         const barLeft = Math.min(firstChildCenterX, startX);
         const barRight = Math.max(lastChildCenterX, startX);
         const barWidth = barRight - barLeft;
@@ -290,7 +290,7 @@ function drawChildrenLines() {
         horizontalBar.style.setProperty('width', barWidth + 'px', 'important');
         horizontalBar.style.setProperty('height', '2px', 'important');
 
-        // 3. Verticale takjes vanaf elk kind omhoog naar de horizontale bar op endY
+        // 3. Vertical branches from each child upward to the horizontal bar at endY
         childCards.forEach((card, idx) => {
             const vLine = document.getElementById('jt-child-vertical-' + idx);
             if (vLine) {

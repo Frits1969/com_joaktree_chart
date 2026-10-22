@@ -1,23 +1,23 @@
 /**
  * ============================================================================
  * Component    : com_joaktree_chart
- * Bestand      : jtchart_calculator.js
- * Locatie      : media/com_joaktree_chart/js/
- * Aangemaakt   : 13-10-2026
- * Gewijzigd    : 21-10-2026
+ * File         : jtchart_calculator.js
+ * Location     : media/com_joaktree_chart/js/
+ * Created      : 13-10-2026
+ * Modified     : 21-10-2026
  *
- * Doel:
- * Beheert de berekeningen, afmetingen en rekenlogica voor de grafische
- * visualisatie (chart) binnen de persoonsweergave van com_joaktree_chart,
- * inclusief de dynamische positionering van de hoofdpersoon, partners en kinderen.
+ * Purpose:
+ * Manages the calculations, dimensions and calculation logic for the graphical
+ * visualisation (chart) within the person view of com_joaktree_chart,
+ * including dynamic positioning of the main person, partners and children.
  *
- * Dit component verzorgt de grafische visualisatie van
- * genealogische gegevens uit com_joaktree.
+ * This component provides the graphical visualisation of
+ * genealogical data from com_joaktree.
  *
- * Auteur       : Frits van Leeuwen
- * Bedrijf      : Van Leeuwen Webdesign
+ * Author       : Frits van Leeuwen
+ * Company      : Van Leeuwen Webdesign
  * Website      : https://vanleeuwenwebdesign.nl
- * Licentie     : GNU General Public License v2 of later
+ * License      : GNU General Public License v2 or later
  * ============================================================================
  */
 
@@ -34,20 +34,20 @@ function updateContainerDimensions() {
     if (widthEl) widthEl.textContent = width;
     if (heightEl) heightEl.textContent = height;
 
-    // 1. Laag 1 (ouders) berekenen
+    // 1. Calculate Layer 1 (parents)
     const parentPositions = positionParentCards(width);
 
-    // 2. Laag 2 (hoofdpersoon + partner) positioneren
+    // 2. Position Layer 2 (main person + partner)
     positionMainPerson(width, parentPositions);
     positionPartnerPerson(width, parentPositions);
 
-    // 3. Laag 3 (kinderen) positioneren
+    // 3. Position Layer 3 (children)
     positionChildrenCards(width, parentPositions);
 }
 
 /**
- *** Ouders & Schoonouders (Laag 1) - De Basis ---
- * Geeft de berekende X-posities (left) en breedtes terug voor gebruik in Laag 2.
+ *** Parents & In-laws (Layer 1) - The Foundation ---
+ * Returns the calculated X positions (left) and widths for use in Layer 2.
  */
 function positionParentCards(totalWidth) {
     const parentsLayer = document.getElementById('parents-layer');
@@ -55,7 +55,7 @@ function positionParentCards(totalWidth) {
 
     const layerHeight = parentsLayer.clientHeight;
     const parentLayerWidth = parentsLayer.clientWidth || totalWidth;
-    const gapCenter = 20; // Vaste tussenruimte tussen moeder HP en vader Partner
+    const gapCenter = 20; // Fixed gap between mother HP and father Partner
 
     const mainFatherContainer = document.getElementById('mainParents-father-card');
     const mainMotherContainer = document.getElementById('mainParents-mother-card');
@@ -74,7 +74,7 @@ function positionParentCards(totalWidth) {
     let currentX = 0;
     let fatherMainLeft = 0, motherMainLeft = 0, fatherPartnerLeft = 0, motherPartnerLeft = 0;
 
-    // 1. Vader Hoofdpersoon
+    // 1. Father of Main Person
     if (mainFatherContainer) {
         fatherMainLeft = currentX;
         const height = mainFatherContainer.offsetHeight || 100;
@@ -86,7 +86,7 @@ function positionParentCards(totalWidth) {
     }
     currentX += wFatherMain + lineWidth;
 
-    // Relatiekaartje Ouders Hoofdpersoon
+    // Relation card for Parents of Main Person
     const mainParentsRelWrapper = document.getElementById('jt-main-parents-relation-card-wrapper');
     if (mainParentsRelWrapper && mainFatherContainer) {
         const relLeft = fatherMainLeft + wFatherMain + (lineWidth / 2);
@@ -98,7 +98,7 @@ function positionParentCards(totalWidth) {
         mainParentsRelWrapper.style.setProperty('display', 'block', 'important');
     }
 
-    // 2. Moeder Hoofdpersoon
+    // 2. Mother of Main Person
     if (mainMotherContainer) {
         motherMainLeft = currentX;
         const height = mainMotherContainer.offsetHeight || 100;
@@ -110,7 +110,7 @@ function positionParentCards(totalWidth) {
     }
     currentX += wMotherMain + gapCenter;
 
-    // 3. Vader Partner
+    // 3. Father of Partner
     if (partnerFather) {
         fatherPartnerLeft = currentX;
         const height = partnerFather.offsetHeight || 100;
@@ -122,7 +122,7 @@ function positionParentCards(totalWidth) {
     }
     currentX += wFatherPartner + lineWidth;
 
-    // Relatiekaartje Ouders Partner
+    // Relation card for Parents of Partner
     const partnerParentsRelWrapper = document.getElementById('jt-partner-parents-relation-card-wrapper');
     if (partnerParentsRelWrapper && partnerFather) {
         const relLeft = fatherPartnerLeft + wFatherPartner + (lineWidth / 2);
@@ -134,7 +134,7 @@ function positionParentCards(totalWidth) {
         partnerParentsRelWrapper.style.setProperty('display', 'block', 'important');
     }
 
-    // 4. Moeder Partner
+    // 4. Mother of Partner
     if (partnerMother) {
         motherPartnerLeft = parentLayerWidth - wMotherPartner;
         const height = partnerMother.offsetHeight || 100;
@@ -157,7 +157,7 @@ function positionParentCards(totalWidth) {
 }
 
 /**
- *** Hoofdpersoon (Laag 2) ***
+ *** Main Person (Layer 2) ***
  */
 function positionMainPerson(totalWidth, parentPositions) {
     const mainCard = document.getElementById('main-person-card');
@@ -177,7 +177,7 @@ function positionMainPerson(totalWidth, parentPositions) {
 }
 
 /**
- * *** Actieve partner en gestapelde partners (Laag 2) ***
+ * *** Active partner and stacked partners (Layer 2) ***
  */
 function positionPartnerPerson(totalWidth, parentPositions) {
     const VISIBLE_STRIP_WIDTH = 40;
@@ -219,7 +219,7 @@ function positionPartnerPerson(totalWidth, parentPositions) {
 
     const shiftOffset = VISIBLE_STRIP_WIDTH;
 
-    // Eerdere partners schuiven naar links én naar boven
+    // Earlier partners shift left and upward
     earlierCards.forEach((card) => {
         const level = parseInt(card.getAttribute('data-level')) || 1;
         const offset = level * shiftOffset;
@@ -230,7 +230,7 @@ function positionPartnerPerson(totalWidth, parentPositions) {
         card.style.setProperty('z-index', (5 - level), 'important');
     });
 
-    // Latere partners schuiven naar rechts én naar ONDER
+    // Later partners shift right and downward
     laterCards.forEach((card) => {
         const level = parseInt(card.getAttribute('data-level')) || 1;
         const offset = level * shiftOffset;
@@ -243,7 +243,7 @@ function positionPartnerPerson(totalWidth, parentPositions) {
 }
 
 /**
- * *** Kinderen (Laag 3) ***
+ * *** Children (Layer 3) ***
  */
 function positionChildrenCards(totalWidth, parentPositions) {
     const childrenLayer = document.getElementById('children-layer');
@@ -255,9 +255,9 @@ function positionChildrenCards(totalWidth, parentPositions) {
 
     const layerWidth = childrenLayer.clientWidth || totalWidth;
     const layerHeight = childrenLayer.clientHeight || 300;
-    const gap = 10; // Exact 10px tussenruimte tussen de kinderkaarten
+    const gap = 10; // Exactly 10px gap between child cards
 
-    // Bepaal de maximale breedte van de kinderkaarten
+    // Determine the maximum width of the child cards
     let maxChildWidth = 250;
     childCards.forEach(card => {
         const w = card.offsetWidth;
@@ -268,14 +268,14 @@ function positionChildrenCards(totalWidth, parentPositions) {
 
     const activeCardHeight = childCards[0].offsetHeight || 100;
 
-    // Pas de breedte en hoogte toe op alle kinderkaarten
+    // Apply the width and height to all child cards
     childCards.forEach(card => {
         card.style.setProperty('width', maxChildWidth + 'px', 'important');
         card.style.setProperty('height', activeCardHeight + 'px', 'important');
         card.style.setProperty('box-sizing', 'border-box', 'important');
     });
 
-    // Bepaal het midden van de relatielijn tussen hoofdpersoon en actieve partner in Laag 2
+    // Determine the centre of the relation line between the main person and active partner in Layer 2
     const mainCard = document.getElementById('main-person-card');
     const partnerCard = document.getElementById('partner-person-card');
     let relationCenterX = totalWidth / 2;
@@ -288,22 +288,22 @@ function positionChildrenCards(totalWidth, parentPositions) {
         relationCenterX = mainCard.offsetLeft + (mainCard.offsetWidth / 2);
     }
 
-    // Totale breedte van alle kinderkaarten inclusief de 10px gaps
+    // Total width of all child cards including the 10px gaps
     const totalChildrenWidth = (numChildren * maxChildWidth) + ((numChildren - 1) * gap);
 
-    // 1. Centraliseer de rij rondom relationCenterX
+    // 1. Centre the row around relationCenterX
     let startX = relationCenterX - (totalChildrenWidth / 2);
 
-    // 2. Als de linker kant buiten de laag valt, begin dan strak op left = 0px
+    // 2. If the left side falls outside the layer, start flush at left = 0px
     if (startX < 0) {
         startX = 0;
     }
 
-    // 3. Pas de breedte van de children-layer aan voor de scrollbar indien nodig
+    // 3. Adjust the width of the children-layer to accommodate a scrollbar if needed
     const requiredWidth = Math.max(layerWidth, startX + totalChildrenWidth + 20);
     childrenLayer.style.setProperty('width', requiredWidth + 'px', 'important');
 
-    // 4. Positoneer elk kind netjes naast elkaar met 10px tussenruimte
+    // 4. Position each child neatly side by side with 10px gap
     let currentX = startX;
     childCards.forEach((card, index) => {
         const top = (layerHeight - activeCardHeight) / 2;
@@ -312,12 +312,12 @@ function positionChildrenCards(totalWidth, parentPositions) {
         card.style.setProperty('left', currentX + 'px', 'important');
         card.style.setProperty('top', (top > 0 ? top : 0) + 'px', 'important');
 
-        // Verhoog currentX voor het volgende kaartje
+        // Increment currentX for the next card
         currentX += maxChildWidth + gap;
     });
 }
 
-// Uitvoeren bij laden
+// Execute on load
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', updateContainerDimensions);
 } else {

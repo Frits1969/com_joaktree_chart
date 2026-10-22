@@ -1,19 +1,19 @@
 /*
  * ============================================================================
  * Component   : com_joaktree_chart
- * Bestand     : layers.css
- * Aangemaakt  : 17-10-2026
- * Gewijzigd   :
+ * File        : layers.css
+ * Created     : 17-10-2026
+ * Modified    :
  *
- * Doel        : Indeling van de grafische relatiekaarten.
+ * Purpose     : Layout of the graphical relation cards.
  *
- * Dit component verzorgt de grafische visualisatie van
- * genealogische gegevens uit com_joaktree.
+ * This component provides the graphical visualisation of
+ * genealogical data from com_joaktree.
  *
- * Auteur       : Frits van Leeuwen
- * Bedrijf      : Van Leeuwen Webdesign
+ * Author       : Frits van Leeuwen
+ * Company      : Van Leeuwen Webdesign
  * Website      : https://vanleeuwenwebdesign.nl
- * Licentie     : GNU General Public License v2 of later
+ * License      : GNU General Public License v2 or later
  * ============================================================================
  */
 
@@ -22,11 +22,11 @@
 #jt-partner-parents-relation-card-wrapper {
     position: absolute !important;
     display: none;
-    /* Standaard verborgen, JS maakt het zichtbaar */
+    /* Hidden by default, JS makes it visible */
     z-index: 15 !important;
     pointer-events: none;
-    /* -50% X-as centreert het kaartje precies in het midden van de lijn
-       -100% Y-as zorgt dat de onderkant op de lijn rust */
+    /* -50% X-axis centres the card exactly in the middle of the line
+       -100% Y-axis ensures the bottom rests on the line */
     transform: translate(-50%, -100%);
 }
 

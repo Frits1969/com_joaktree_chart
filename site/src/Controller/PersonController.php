@@ -2,21 +2,21 @@
 /**
  * ============================================================================
  * Component    : com_joaktree_chart
- * Bestand      : PersonController.php
- * Locatie      : site/src/Controller
- * Aangemaakt   : 12-10-2026
- * Gewijzigd    :
+ * File         : PersonController.php
+ * Location     : site/src/Controller
+ * Created      : 12-10-2026
+ * Modified     :
  *
- * Doel:
- * Controller voor de person-view.
+ * Purpose:
+ * Controller for the person view.
  *
- * Dit component verzorgt de grafische visualisatie van
- * genealogische gegevens uit com_joaktree.
+ * This component provides the graphical visualisation of
+ * genealogical data from com_joaktree.
  *
- * Auteur       : Frits van Leeuwen
- * Bedrijf      : Van Leeuwen Webdesign
+ * Author       : Frits van Leeuwen
+ * Company      : Van Leeuwen Webdesign
  * Website      : https://vanleeuwenwebdesign.nl
- * Licentie     : GNU General Public License v2 of later
+ * License      : GNU General Public License v2 or later
  * ============================================================================
  */
 

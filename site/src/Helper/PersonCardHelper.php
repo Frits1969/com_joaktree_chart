@@ -2,19 +2,19 @@
 /**
  * =============================================================================
  * Component     : com_joaktree_chart
- * Bestand       : PersonCardHelper.php
- * Aangemaakt    : 13-10-2026
- * Gewijzigd     : 19-10-2026
+ * File          : PersonCardHelper.php
+ * Created       : 13-10-2026
+ * Modified      : 19-10-2026
  *
- * Doel          : Centrale helper voor het renderen van alle personenkaarten.
+ * Purpose       : Central helper for rendering all person cards.
  *
- * Dit component verzorgt de grafische visualisatie van
- * genealogische gegevens uit com_joaktree.
+ * This component provides the graphical visualisation of
+ * genealogical data from com_joaktree.
  *
- * Auteur        : Frits van Leeuwen
- * Bedrijf       : Van Leeuwen Webdesign
+ * Author        : Frits van Leeuwen
+ * Company       : Van Leeuwen Webdesign
  * Website       : https://vanleeuwenwebdesign.nl
- * Licentie      : GNU General Public License v2 of later
+ * License       : GNU General Public License v2 or later
  * =============================================================================
  */
 
@@ -25,7 +25,7 @@ defined('_JEXEC') or die;
 class PersonCardHelper
 {
     /**
-     * Interne hulpmethode om de HTML-inhoud (naam en datums) van een kaart te genereren.
+     * Internal helper method to generate the HTML content (name and dates) of a card.
      */
     private static function renderCardInner(array $person, string $birthSymbol, string $deathSymbol): string
     {
@@ -52,7 +52,7 @@ class PersonCardHelper
     }
 
     /**
-     * Basis-renderfunctie voor standaard kaarten (zoals kinderen).
+     * Base render function for standard cards (such as children).
      */
     public static function render(
         ?array $person,
@@ -79,14 +79,14 @@ class PersonCardHelper
     }
 
     /**
-     * 1. Rendert de Hoofdpersoon.
+     * 1. Renders the Main Person card.
      */
     public static function renderMainCard(?array $person, string $birthSymbol, string $deathSymbol): string
     {
         if (empty($person)) {
             return '<div id="main-person-card" class="person-card person-card-main">'
-                 . '<div class="person-name">Selecteer</div>'
-                 . '<div class="person-family-name">Hoofdpersoon</div>'
+                 . '<div class="person-name">Select</div>'
+                 . '<div class="person-family-name">Main Person</div>'
                  . '<div class="person-dates">* - †</div>'
                  . '</div>';
         }
@@ -96,12 +96,12 @@ class PersonCardHelper
     }
 
     /**
-     * 2. Rendert de Actieve Partner (wel of geen kaart afhankelijk van aanwezigheid).
+     * 2. Renders the Active Partner card (shown or hidden depending on presence).
      */
     public static function renderActivePartnerCard(?array $person, string $birthSymbol, string $deathSymbol): string
     {
         if (empty($person)) {
-            return ''; // Geen partner = helemaal niets tonen
+            return ''; // No partner = show nothing at all
         }
 
         $partnerUrl = $person['url'] ?? '';
@@ -120,7 +120,7 @@ class PersonCardHelper
     }
 
     /**
-     * 3. Rendert een Gestapelde (inactieve) Partnerkaart.
+     * 3. Renders a Stacked (inactive) Partner card.
      */
     public static function renderStackedCard(
         ?array $person,
@@ -158,12 +158,12 @@ class PersonCardHelper
     }
 
     /**
-     * 4. Rendert een Ouderkaart (vader/moeder van hoofdpersoon of partner).
+     * 4. Renders a Parent card (father/mother of the main person or partner).
      */
     public static function renderParentCard(?array $person, string $birthSymbol, string $deathSymbol, string $cardId, bool $clickable = false): string
     {
         if (empty($person)) {
-            return ''; // Geen ouder = geen kaart renderen
+            return ''; // No parent = do not render a card
         }
 
         $url = htmlspecialchars($person['url'] ?? '', ENT_QUOTES, 'UTF-8');
@@ -185,7 +185,7 @@ class PersonCardHelper
     }
 
     /**
-     * 5. Rendert een Kinderkaart voor Laag 3.
+     * 5. Renders a Child card for Layer 3.
      */
     public static function renderChildCard(?array $person, string $birthSymbol, string $deathSymbol, string $cardId, bool $clickable = true): string
     {
@@ -195,7 +195,7 @@ class PersonCardHelper
 
         $url = htmlspecialchars($person['url'] ?? '', ENT_QUOTES, 'UTF-8');
 
-        // Voeg 'person-card-partner' toe voor exact dezelfde opmaak en kader als de ouders
+        // Add 'person-card-partner' for the exact same styling and border as the parent cards
         $cardClass = 'person-card person-card-partner shadow-sm child-card';
         if ($clickable && !empty($url)) {
             $cardClass .= ' person-card-clickable jt-person-link';

@@ -2,21 +2,21 @@
 /**
  * ============================================================================
  * Component    : com_joaktree_chart
- * Bestand      : default.php
- * Locatie      : site/tmpl/person
- * Aangemaakt   : 13-10-2026
- * Gewijzigd    : 20-10-2026
+ * File         : default.php
+ * Location     : site/tmpl/person
+ * Created      : 13-10-2026
+ * Modified     : 20-10-2026
  *
- * Doel:
- * Eerste testpagina van Joaktree Chart.
+ * Purpose:
+ * First test page of Joaktree Chart.
  *
- * Dit component verzorgt de grafische visualisatie van
- * genealogische gegevens uit com_joaktree.
+ * This component provides the graphical visualisation of
+ * genealogical data from com_joaktree.
  *
- * Auteur       : Frits van Leeuwen
- * Bedrijf      : Van Leeuwen Webdesign
+ * Author       : Frits van Leeuwen
+ * Company      : Van Leeuwen Webdesign
  * Website      : https://vanleeuwenwebdesign.nl
- * Licentie     : GNU General Public License v2 of later
+ * License      : GNU General Public License v2 or later
  * ============================================================================
  */
 
@@ -28,7 +28,7 @@ use VanLeeuwenWebdesign\Component\JoaktreeChart\Site\Helper\SymbolHelper;
 use VanLeeuwenWebdesign\Component\JoaktreeChart\Site\Helper\PersonCardHelper;
 use VanLeeuwenWebdesign\Component\JoaktreeChart\Site\Helper\RelationCardHelper;
 
-// Laad de stylesheets en javascript via de Uri-root
+// Load stylesheets and javascript via the Uri root
 $document = Joomla\CMS\Factory::getDocument();
 $document->addStyleSheet(Uri::root(true) . '/media/com_joaktree_chart/css/jtchart.css');
 $document->addStyleSheet(Uri::root(true) . '/media/com_joaktree_chart/css/jtchart_layers.css');
@@ -40,7 +40,7 @@ $document->addScript(Uri::root(true) . '/media/com_joaktree_chart/js/jtchart_lin
 $document->addScript(Uri::root(true) . '/media/com_joaktree_chart/js/jtchart_changepartner.js');
 $document->addScript(Uri::root(true) . '/media/com_joaktree_chart/js/jtchart_lines.js');
 
-// Gegevens ophalen uit de view / model
+// Retrieve data from the view / model
 $mainPerson     = $this->person ?? null;
 $mainParents    = $this->mainParents ?? [];
 $partnerParents = $this->partnerParents ?? [];
@@ -48,7 +48,7 @@ $partnerPerson  = $this->partnerPerson ?? null;
 $children       = $this->children ?? [];
 $layout         = $this->layout ?? [];
 
-// Symbolen inladen via SymbolHelper
+// Load symbols via SymbolHelper
 $birthSymbol = SymbolHelper::birth();
 $deathSymbol = SymbolHelper::death();
 ?>
@@ -59,7 +59,7 @@ $deathSymbol = SymbolHelper::death();
         <div id="badge-inner">
 
             <!-- ======================================================== -->
-            <!-- OVERKOEPELENDE VERBINDINGSLIJNEN (LAAG 1 -> LAAG 2)      -->
+            <!-- OVERARCHING CONNECTION LINES (LAYER 1 -> LAYER 2)         -->
             <!-- ======================================================== -->
             <?php if (!empty($mainParents['father']) || !empty($mainParents['mother'])) : ?>
             <div id="jt-main-parents-vertical-line" class="jt-line-vertical"></div>
@@ -70,20 +70,20 @@ $deathSymbol = SymbolHelper::death();
             <?php endif; ?>
 
             <!-- ======================================================== -->
-            <!-- LAAG 1: OUDERS                                           -->
+            <!-- LAYER 1: PARENTS                                          -->
             <!-- ======================================================== -->
             <div id="parents-layer">
 
-                <!-- 1. OUDERS HOOFDPERSOON -->
+                <!-- 1. PARENTS OF MAIN PERSON -->
                 <?php if (!empty($mainParents['father']) || !empty($mainParents['mother'])) : ?>
                 <?php if (!empty($mainParents['father'])) : ?>
                 <?php echo PersonCardHelper::renderParentCard($mainParents['father'], $birthSymbol, $deathSymbol, 'mainParents-father-card', true); ?>
                 <?php endif; ?>
 
-                <!-- Verbindingslijn tussen ouders van hoofdpersoon -->
+                <!-- Connection line between parents of main person -->
                 <div id="jt-main-parents-line" class="jt-line-parents"></div>
 
-                <!-- Relatiekaartje tussen ouders van hoofdpersoon -->
+                <!-- Relation card between parents of main person -->
                 <?php if (!empty($mainParents['marriageInfo']) || !empty($mainParents['divorceInfo'])) : ?>
                 <div id="jt-main-parents-relation-card-wrapper">
                     <?php echo RelationCardHelper::render($mainParents['marriageInfo'] ?? '', $mainParents['divorceInfo'] ?? ''); ?>
@@ -95,16 +95,16 @@ $deathSymbol = SymbolHelper::death();
                 <?php endif; ?>
                 <?php endif; ?>
 
-                <!-- 2. OUDERS PARTNER -->
+                <!-- 2. PARENTS OF PARTNER -->
                 <?php if (!empty($partnerParents['father']) || !empty($partnerParents['mother'])) : ?>
                 <?php if (!empty($partnerParents['father'])) : ?>
                 <?php echo PersonCardHelper::renderParentCard($partnerParents['father'], $birthSymbol, $deathSymbol, 'partnerParents-father-card', true); ?>
                 <?php endif; ?>
 
-                <!-- Verbindingslijn tussen ouders van partner -->
+                <!-- Connection line between parents of partner -->
                 <div id="jt-partner-parents-line" class="jt-line-parents"></div>
 
-                <!-- Relatiekaartje tussen ouders van partner -->
+                <!-- Relation card between parents of partner -->
                 <?php if (!empty($partnerParents['marriageInfo']) || !empty($partnerParents['divorceInfo'])) : ?>
                 <div id="jt-partner-parents-relation-card-wrapper">
                     <?php echo RelationCardHelper::render($partnerParents['marriageInfo'] ?? '', $partnerParents['divorceInfo'] ?? ''); ?>
@@ -119,15 +119,15 @@ $deathSymbol = SymbolHelper::death();
             </div>
 
             <!-- ======================================================== -->
-            <!-- LAAG 2: HOOFDPERSOON + PARTNER(S)                        -->
+            <!-- LAYER 2: MAIN PERSON + PARTNER(S)                         -->
             <!-- ======================================================== -->
             <div id="main-layer">
 
-                <!-- Kaart hoofdpersoon -->
+                <!-- Main person card -->
                 <?php
                     echo PersonCardHelper::renderMainCard($mainPerson, $birthSymbol, $deathSymbol);
                 ?>
-                <!-- Relatiekaartje boven de relatielijn -->
+                <!-- Relation card above the relation line -->
                 <?php if (!empty($partnerPerson)) : ?>
                 <div id="jt-main-relation-card-wrapper">
                     <?php
@@ -138,27 +138,27 @@ $deathSymbol = SymbolHelper::death();
                     ?>
                 </div>
                 <?php endif; ?>
-                <!-- Verbindingslijn tussen hoofdpersoon en actieve partner -->
+                <!-- Connection line between main person and active partner -->
                 <div id="jt-partner-connection-line" class="jt-line-partner"></div>
 
                 <!-- ======================================================== -->
-                <!-- PARTNER SECTIE (Dynamisch aantal placeholders)           -->
+                <!-- PARTNER SECTION (Dynamic number of placeholders)          -->
                 <!-- ======================================================== -->
                 <div id="partner-container">
 
-                    <!-- 1. EERDERE PARTNERS -->
+                    <!-- 1. EARLIER PARTNERS -->
                     <?php if (!empty($this->earlierPartners)) : ?>
                     <?php foreach ($this->earlierPartners as $index => $earlierPartner) : ?>
                     <?php echo PersonCardHelper::renderStackedCard($earlierPartner, 'earlier', $index + 1); ?>
                     <?php endforeach; ?>
                     <?php endif; ?>
 
-                    <!-- 2. ACTIEVE PARTNER -->
+                    <!-- 2. ACTIVE PARTNER -->
                     <?php
                         echo PersonCardHelper::renderActivePartnerCard($partnerPerson, $birthSymbol, $deathSymbol);
                     ?>
 
-                    <!-- 3. LATERE PARTNERS -->
+                    <!-- 3. LATER PARTNERS -->
                     <?php if (!empty($this->laterPartners)) : ?>
                     <?php foreach ($this->laterPartners as $index => $laterPartner) : ?>
                     <?php echo PersonCardHelper::renderStackedCard($laterPartner, 'later', $index + 1); ?>
@@ -169,7 +169,7 @@ $deathSymbol = SymbolHelper::death();
             </div>
 
             <!-- ======================================================== -->
-            <!-- LAAG 3: KINDEREN                                         -->
+            <!-- LAYER 3: CHILDREN                                         -->
             <!-- ======================================================== -->
             <div id="children-layer">
                 <?php if (!empty($children)) : ?>
@@ -188,7 +188,7 @@ $deathSymbol = SymbolHelper::death();
             </div>
 
             <!-- ======================================================== -->
-            <!-- VERBINDINGSLIJNEN NAAR KINDEREN (HARAK / KAM-STRUCTUUR)  -->
+            <!-- CONNECTION LINES TO CHILDREN (COMB / RAKE STRUCTURE)      -->
             <!-- ======================================================== -->
             <?php if (!empty($children)) : ?>
             <div id="jt-children-vertical-main" class="jt-line-vertical"></div>

@@ -2,21 +2,21 @@
 /**
  * ============================================================================
  * Component    : com_joaktree_chart
- * Bestand      : PersonModel.php
- * Locatie      : site/src/Model
- * Aangemaakt   : 13-10-2026
- * Gewijzigd    : 20-10-2026
+ * File         : PersonModel.php
+ * Location     : site/src/Model
+ * Created      : 13-10-2026
+ * Modified     : 20-10-2026
  *
- * Doel:
- * Model voor het ophalen van persoons- en relatiegegevens uit com_joaktree.
+ * Purpose:
+ * Model for retrieving person and relation data from com_joaktree.
  *
- * Dit component verzorgt de grafische visualisatie van
- * genealogische gegevens uit com_joaktree.
+ * This component provides the graphical visualisation of
+ * genealogical data from com_joaktree.
  *
- * Auteur       : Frits van Leeuwen
- * Bedrijf      : Van Leeuwen Webdesign
+ * Author       : Frits van Leeuwen
+ * Company      : Van Leeuwen Webdesign
  * Website      : https://vanleeuwenwebdesign.nl
- * Licentie     : GNU General Public License v2 of later
+ * License      : GNU General Public License v2 or later
  * ============================================================================
  */
 
@@ -31,7 +31,7 @@ use Joomla\CMS\Router\Route;
 class PersonModel extends BaseDatabaseModel
 {
     /**
-     * Haal de gegevens van de hoofdpersoon op
+     * Retrieve the data of the main person
      */
     public function getPerson()
     {
@@ -72,7 +72,7 @@ class PersonModel extends BaseDatabaseModel
             'personKey'    => $idKey,
             'itemId'       => '',
             'url'          => '',
-            'firstNames'   => $person->firstName ?? 'Onbekend',
+            'firstNames'   => $person->firstName ?? 'Unknown',
             'familyName'   => $person->familyName ?? '',
             'birthInfo'    => $this->formatEventInfo($events['BIRT'] ?? null),
             'deathInfo'    => $this->formatEventInfo($events['DEAT'] ?? null),
@@ -82,13 +82,13 @@ class PersonModel extends BaseDatabaseModel
     }
 
     /**
-     * Haal alle kinderen op voor een persoon
+     * Retrieve all children for a person
      */
     public function getChildren(string $personId, int $appId = 1): array
     {
         $db = $this->getDatabase() ?? Factory::getContainer()->get('DatabaseDriver');
 
-        // In Joaktree is person_id_2 de ouder en person_id_1 het kind
+        // In Joaktree, person_id_2 is the parent and person_id_1 is the child
         $query = $db->getQuery(true)
             ->select('r.*')
             ->from($db->quoteName('#__joaktree_relations', 'r'))
@@ -101,11 +101,11 @@ class PersonModel extends BaseDatabaseModel
 
         $children = [];
         foreach ($relations as $rel) {
-            $childKey = $rel->person_id_1; // Het kind bevindt zich in person_id_1
+            $childKey = $rel->person_id_1; // The child is stored in person_id_1
             $childArray = $this->buildPersonArray($childKey, $appId);
 
             if ($childArray) {
-                // Voorkom dubbelingen (indien zowel via vader als moeder gekoppeld)
+                // Prevent duplicates (in case linked via both father and mother)
                 $exists = false;
                 foreach ($children as $c) {
                     if ($c['personKey'] === $childKey) {
@@ -123,7 +123,7 @@ class PersonModel extends BaseDatabaseModel
     }
 
     /**
-     * Haal persoonsgebeurtenissen op
+     * Retrieve person events
      */
     public function getPersonEvents(string $personId, array $codes = ['BIRT', 'DEAT']): array
     {
@@ -146,7 +146,7 @@ class PersonModel extends BaseDatabaseModel
     }
 
     /**
-     * Haal het aantal overige partners op
+     * Retrieve the count of additional partners
      */
     public function getPartnerCount(string $personId, int $appId = 1): int
     {
@@ -165,7 +165,7 @@ class PersonModel extends BaseDatabaseModel
     }
 
     /**
-     * Haal alle ouders op
+     * Retrieve all parents
      */
     public function getParents(string $personId, int $appId = 1): array
     {
@@ -215,7 +215,7 @@ class PersonModel extends BaseDatabaseModel
     }
 
     /**
-     * Haal alle partners op
+     * Retrieve all partners
      */
     public function getPartners(string $personId, int $appId = 1, ?string $selectedPartnerKey = null): array
     {

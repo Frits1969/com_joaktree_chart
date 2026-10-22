@@ -2,21 +2,21 @@
 /**
  * ============================================================================
  * Component    : com_joaktree_chart
- * Bestand      : HtmlView.php
- * Locatie      : site/src/View/Person
- * Aangemaakt   : 12-10-2026
- * Gewijzigd    : 20-10-2026
+ * File         : HtmlView.php
+ * Location     : site/src/View/Person
+ * Created      : 12-10-2026
+ * Modified     : 20-10-2026
  *
- * Doel:
- * View voor de persoonspagina.
+ * Purpose:
+ * View for the person page.
  *
- * Dit component verzorgt de grafische visualisatie van
- * genealogische gegevens uit com_joaktree.
+ * This component provides the graphical visualisation of
+ * genealogical data from com_joaktree.
  *
- * Auteur       : Frits van Leeuwen
- * Bedrijf      : Van Leeuwen Webdesign
+ * Author       : Frits van Leeuwen
+ * Company      : Van Leeuwen Webdesign
  * Website      : https://vanleeuwenwebdesign.nl
- * Licentie     : GNU General Public License v2 of later
+ * License      : GNU General Public License v2 or later
  * ============================================================================
  */
 
@@ -80,7 +80,7 @@ class HtmlView extends JoomlaHtmlView
                 );
             }
 
-            // Haal de kinderen op van de hoofdpersoon
+            // Retrieve the children of the main person
             if ($this->person && method_exists($model, 'getChildren')) {
                 $this->children = $model->getChildren(
                     $this->person['personKey'],

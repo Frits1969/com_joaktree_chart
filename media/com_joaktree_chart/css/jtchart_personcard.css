@@ -1,24 +1,24 @@
 /*
  * ============================================================================
  * Component   : com_joaktree_chart
- * Bestand     : jtchart_personcard.css
- * Aangemaakt  : 13-10-2026
- * Gewijzigd   : 19-10-2026
+ * File        : jtchart_personcard.css
+ * Created     : 13-10-2026
+ * Modified    : 19-10-2026
  *
- * Doel        : Indeling van de grafische naamkaarten.
+ * Purpose     : Layout of the graphical name cards.
  *
- * Dit component verzorgt de grafische visualisatie van
- * genealogische gegevens uit com_joaktree.
+ * This component provides the graphical visualisation of
+ * genealogical data from com_joaktree.
  *
- * Auteur       : Frits van Leeuwen
- * Bedrijf      : Van Leeuwen Webdesign
+ * Author       : Frits van Leeuwen
+ * Company      : Van Leeuwen Webdesign
  * Website      : https://vanleeuwenwebdesign.nl
- * Licentie     : GNU General Public License v2 of later
+ * License      : GNU General Public License v2 or later
  * ============================================================================
  */
 
 /* ============================================================================
- * 1. Basisstijlen voor alle persoonskaarten
+ * 1. Base styles for all person cards
  * ============================================================================ */
 .person-card {
     position: absolute !important;
@@ -33,10 +33,10 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
     text-align: center !important;
     white-space: nowrap !important;
-    /* Houdt datum + locatie netjes op één regel */
+    /* Keeps date + location neatly on one line */
 }
 
-/* Zorg dat de tekstregels gecentreerd blijven en namen niet ongewenst afbreken */
+/* Ensure text lines remain centred and names do not break unexpectedly */
 .person-card [class*="person-"],
 #main-person-card [class*="person-"],
 #partner-person-card [class*="person-"] {
@@ -49,7 +49,7 @@
 }
 
 /* ============================================================================
- * 2. Specifieke stijlen: Hoofdpersoon (dubbel kader)
+ * 2. Specific styles: Main Person (double border)
  * ============================================================================ */
 .person-card.person-card-main {
     background: #ffffff;
@@ -57,7 +57,7 @@
 }
 
 /* ============================================================================
- * 3. Specifieke stijlen: Partner / Placeholder (enkel kader)
+ * 3. Specific styles: Partner / Placeholder (single border)
  * ============================================================================ */
 .person-card.person-card-partner,
 #partner-person-card {
@@ -65,7 +65,7 @@
     border: 1px solid #2c3e50 !important;
 }
 
-/* Container voor alle partnerkaarten (actief en gestapeld) */
+/* Container for all partner cards (active and stacked) */
 #partner-container {
     position: absolute !important;
     left: 0;
@@ -75,17 +75,17 @@
 }
 
 /* ============================================================================
- * 4. Gestapelde partnerkaarten (Eerdere & Latere partners)
+ * 4. Stacked partner cards (Earlier & Later partners)
  * ============================================================================ */
 .person-card.person-card-partner-stack {
     background: #eaeded !important;
     border: 1px solid #7f8c8d !important;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
     z-index: 2 !important;
-    /* Lager dan de verbindingslijn (z-index: 10) */
+    /* Lower than the connection line (z-index: 10) */
 }
 
-/* Eerdere partners: naam bovenin */
+/* Earlier partners: name at the top */
 .person-card-partner-stack .stack-name-top {
     text-align: center !important;
     width: 100%;
@@ -93,13 +93,13 @@
     font-size: 0.9em;
 }
 
-/* Latere partners: kaart als relative container voor naam onderin */
+/* Later partners: card as relative container for name at the bottom */
 .person-card.person-card-partner-stack.partner-stack-later {
     padding: 0 !important;
-    /* Padding opheffen zodat de naam strak tegen de onderkant kan */
+    /* Remove padding so the name can sit flush against the bottom */
 }
 
-/* Naam strak aan de onderkant van de latere partnerkaart */
+/* Name flush at the bottom of the later partner card */
 .person-card-partner-stack .stack-name-bottom {
     position: absolute !important;
     bottom: 12px !important;
@@ -112,7 +112,7 @@
 }
 
 /* ============================================================================
- * 5. Klikbaarheid en interactie
+ * 5. Clickability and interaction
  * ============================================================================ */
 .jt-person-link,
 .jt-inactive-partner-link,
@@ -120,7 +120,7 @@
     cursor: pointer !important;
 }
 
-/* Zorg dat de gestapelde kaart ook visueel reageert op de muis */
+/* Ensure the stacked card also responds visually to the mouse */
 .jt-inactive-partner:hover {
     opacity: 0.9;
 }

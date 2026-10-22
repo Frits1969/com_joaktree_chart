@@ -1,22 +1,21 @@
 /**
  * ============================================================================
  * Component    : com_joaktree_chart
- * Bestand      : jtchart_changepartner.js
- * Locatie      : media/com_joaktree_chart/js/
- * Aangemaakt   : 15-10-2026
- * Gewijzigd    : 19-10-2026
+ * File         : jtchart_changepartner.js
+ * Location     : media/com_joaktree_chart/js/
+ * Created      : 15-10-2026
+ * Modified     : 19-10-2026
  *
- * Doel:
- * Doel         :
- * Afhandelen van interacties op inactieve (gestapelde) partners.
+ * Purpose      :
+ * Handles interactions on inactive (stacked) partners.
  *
- * Dit component verzorgt de grafische visualisatie van
- * genealogische gegevens uit com_joaktree.
+ * This component provides the graphical visualisation of
+ * genealogical data from com_joaktree.
  *
- * Auteur       : Frits van Leeuwen
- * Bedrijf      : Van Leeuwen Webdesign
+ * Author       : Frits van Leeuwen
+ * Company      : Van Leeuwen Webdesign
  * Website      : https://vanleeuwenwebdesign.nl
- * Licentie     : GNU General Public License v2 of later
+ * License      : GNU General Public License v2 or later
  * ============================================================================
  */
 
