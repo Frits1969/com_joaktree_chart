@@ -4,7 +4,7 @@
  * File         : jtchart.css
  * Location     : media/com_joaktree_chart/css/
  * Created      : 13-10-2026
- * Modified     :
+ * Modified     : 23-10-2026
  *
  * Purpose:
  * Styles for the graphical visualisation (chart) within com_joaktree_chart.
@@ -22,12 +22,13 @@
 #jtchart-container {
     position: relative;
     width: 100%;
-    min-height: 900px;
-    background-color: #f9f9f9;
-    border: 1px dashed #ccc;
-    padding: 20px;
+    min-height: 600px;
+    background-color: transparent;
+    border: none;
+    padding: 0px;
     box-sizing: border-box;
     font-family: inherit;
+    overflow-y: auto;
 }
 
 #jtchart-container h2 {

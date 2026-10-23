@@ -243,7 +243,7 @@ function positionPartnerPerson(totalWidth, parentPositions) {
 }
 
 /**
- * *** Children (Layer 3) ***
+ * *** Kinderen (Laag 3) - Met individuele/natuurlijke breedtes ***
  */
 function positionChildrenCards(totalWidth, parentPositions) {
     const childrenLayer = document.getElementById('children-layer');
@@ -255,27 +255,24 @@ function positionChildrenCards(totalWidth, parentPositions) {
 
     const layerWidth = childrenLayer.clientWidth || totalWidth;
     const layerHeight = childrenLayer.clientHeight || 300;
-    const gap = 10; // Exactly 10px gap between child cards
-
-    // Determine the maximum width of the child cards
-    let maxChildWidth = 250;
-    childCards.forEach(card => {
-        const w = card.offsetWidth;
-        if (w > maxChildWidth) {
-            maxChildWidth = w;
-        }
-    });
+    const gap = 10; // Exact 10px tussenruimte tussen de kinderkaarten
 
     const activeCardHeight = childCards[0].offsetHeight || 100;
 
-    // Apply the width and height to all child cards
+    // Zorg dat de kaarten hun eigen natuurlijke breedte behouden (geen geforceerde gelijke breedte)
     childCards.forEach(card => {
-        card.style.setProperty('width', maxChildWidth + 'px', 'important');
         card.style.setProperty('height', activeCardHeight + 'px', 'important');
         card.style.setProperty('box-sizing', 'border-box', 'important');
     });
 
-    // Determine the centre of the relation line between the main person and active partner in Layer 2
+    // Bereken de totale breedte op basis van de som van de EIGEN breedtes van alle kinderkaarten + de gaps
+    let totalChildrenWidth = 0;
+    childCards.forEach(card => {
+        totalChildrenWidth += card.offsetWidth;
+    });
+    totalChildrenWidth += (numChildren - 1) * gap;
+
+    // Bepaal het midden van de relatielijn tussen hoofdpersoon en actieve partner in Laag 2
     const mainCard = document.getElementById('main-person-card');
     const partnerCard = document.getElementById('partner-person-card');
     let relationCenterX = totalWidth / 2;
@@ -288,32 +285,30 @@ function positionChildrenCards(totalWidth, parentPositions) {
         relationCenterX = mainCard.offsetLeft + (mainCard.offsetWidth / 2);
     }
 
-    // Total width of all child cards including the 10px gaps
-    const totalChildrenWidth = (numChildren * maxChildWidth) + ((numChildren - 1) * gap);
-
-    // 1. Centre the row around relationCenterX
+    // 1. Centraliseer de totale rij rondom relationCenterX
     let startX = relationCenterX - (totalChildrenWidth / 2);
 
-    // 2. If the left side falls outside the layer, start flush at left = 0px
+    // 2. Als de linker kant buiten de laag valt, begin dan strak op left = 0px
     if (startX < 0) {
         startX = 0;
     }
 
-    // 3. Adjust the width of the children-layer to accommodate a scrollbar if needed
+    // 3. Pas de breedte van de children-layer aan voor de scrollbar indien nodig
     const requiredWidth = Math.max(layerWidth, startX + totalChildrenWidth + 20);
     childrenLayer.style.setProperty('width', requiredWidth + 'px', 'important');
 
-    // 4. Position each child neatly side by side with 10px gap
+    // 4. Positoneer elk kind netjes naast elkaar met de eigen breedte en 10px tussenruimte
     let currentX = startX;
-    childCards.forEach((card, index) => {
+    childCards.forEach((card) => {
         const top = (layerHeight - activeCardHeight) / 2;
+        const cardWidth = card.offsetWidth;
 
         card.style.setProperty('position', 'absolute', 'important');
         card.style.setProperty('left', currentX + 'px', 'important');
         card.style.setProperty('top', (top > 0 ? top : 0) + 'px', 'important');
 
-        // Increment currentX for the next card
-        currentX += maxChildWidth + gap;
+        // Verhoog currentX met de werkelijke breedte van dit specifieke kaartje + de gap
+        currentX += cardWidth + gap;
     });
 }
 

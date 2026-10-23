@@ -3,7 +3,7 @@
  * Component   : com_joaktree_chart
  * File        : jtchart_layers.css
  * Created     : 13-10-2026
- * Modified    :
+ * Modified    : 23-10-2026
  *
  * Purpose     : Configuration of the fixed layers.
  *
@@ -19,21 +19,21 @@
 
 #parents-layer {
     position: relative;
-    height: 300px;
+    height: 120px;
     background: #d8eaff;
-    border: 1px solid #90b7dd;
+    border: none;
 }
 
 #main-layer {
     position: relative;
     height: 300px;
     background: #d8ffd8;
-    border: 1px solid #90cc90;
+    border: none;
 }
 
 #children-layer {
     position: relative;
-    height: 300px;
-    background: #ffe8d8;
-    border: 1px solid #ddb090;
+    height: 150px;
+    background: transparent;
+    border: none;
 }

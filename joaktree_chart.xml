@@ -11,7 +11,7 @@
     <authorEmail>fwtvanleeuwen@gmail.com</authorEmail>
     <description>Interactive graphical family tree visualization based on genealogy data from Joaktree for Joomla 6.</description>
 
-    <version>1.0.0</version>
+    <version>1.0.2</version>
 
     <namespace path="src">VanLeeuwenWebdesign\Component\JoaktreeChart</namespace>
 
