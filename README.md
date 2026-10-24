@@ -32,7 +32,7 @@ Without Joaktree, com_joaktree_chart cannot function because all genealogy data 
 
 ### Partner Navigation
 
-- Display all partners of the active person
+- Display all partners of the active person in chronological order
 - Switch between partners
 - Change the active relationship
 
@@ -40,7 +40,7 @@ Without Joaktree, com_joaktree_chart cannot function because all genealogy data 
 
 - Display the active relationship
 - Visual relationship cards
-- Connection lines between related persons
+- Precision vector connection lines between related persons
 
 ### Parent Navigation
 
@@ -49,13 +49,19 @@ Without Joaktree, com_joaktree_chart cannot function because all genealogy data 
 
 ### Child Navigation
 
-- Display children of the active relationship
+- Display children of the active relationship in chronological birth order
+- Individual/dynamic card widths based on content size while maintaining precise element spacing
 - Navigate through descendants
 - Automatically update when the active relationship changes
 
+### Dynamic & Fluid Layout
+
+- Borderless, transparent layer architecture for seamless integration with Joomla templates
+- Fully responsive container that adapts height and width dynamically to eliminate unnecessary scrollbars
+
 ## Current Status
 
-Version 1.0.0 is the first stable release suitable for production use.
+Version 1.0.2 is the latest stable release suitable for production use.
 
 The component already supports complete navigation between:
 
@@ -91,6 +97,15 @@ Layout corrections and visualization improvements.
 
 ### v1.0.0
 First stable production-ready release.
+
+### v1.0.1
+Unified parent-relation line drawing and vertical alignment optimizations.
+
+### v1.0.2
+- Transparent and borderless layer design (`#parents-layer`, `#main-layer`, `#children-layer`).
+- Fluid container height adaptation to remove redundant vertical scrollbars.
+- Dynamic individual card widths for children based on content.
+- Verified chronological display sequences for partners and children.
 
 ## Project Goals
 
